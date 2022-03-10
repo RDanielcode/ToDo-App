@@ -4,21 +4,20 @@ import {FcOk} from "react-icons/fc";
 import {FcDisapprove} from "react-icons/fc";
 
 
-function TodoItem (props){
+function TodoItem ({completed, onComplete, onDelete, text}){
     // const onComplete = ()=> {
-    //     props = {...props, completed: true}
-    //     console.log(props)
-    //     return props
-    // };
-    // const onDelete = ()=> console.log(`deleted ${props.text}`);        
+    //     = {... completed: true}
+    //     console.log(
+    //     return     // };
+    // const onDelete = ()=> console.log(`deleted ${text}`);        
 
     return (
         <li className='container__item'>
-            {!props.completed && <FcCheckmark onClick={props.onComplete}/>}
-            {props.completed && <FcOk onClick={props.onComplete}/>}
-            {/* <input  type='checkbox' onClick={props.onComplete}/> */}
-            <p className={`${props.completed && 'item__text--deleted'}` }>{props.text}</p>
-            <span onClick={props.onDelete}><FcDisapprove/></span>
+            {!completed && <FcCheckmark onClick={onComplete}/>}
+            {completed && <FcOk onClick={onComplete}/>}
+            {/* <input  type='checkbox' onClick={onComplete}/> */}
+            <p className={`${completed && 'item__text--deleted'}` }>{text}</p>
+            <span onClick={onDelete}><FcDisapprove/></span>
         </li>
     )
 }

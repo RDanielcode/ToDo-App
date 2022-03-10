@@ -1,6 +1,7 @@
 import React from "react";
 
 function useLogicalStorage(itemName, initialValue){
+    const [sincronizedItem, setSincronizedItem] = React.useState(true);
     const [error, setError] = React.useState(false);
     const [loading, setLoading] = React.useState(true);
     let [item, setItem] = React.useState(initialValue);
@@ -19,12 +20,13 @@ function useLogicalStorage(itemName, initialValue){
           }
           setItem(parsedItem)
           setLoading(false)
+          setSincronizedItem(true)
   
         }catch(error){
           setError(error)
         }
       },1000)
-    }, [])
+    }, [sincronizedItem])
     
   
     const saveItem = (newItem)=>{
@@ -36,9 +38,14 @@ function useLogicalStorage(itemName, initialValue){
         setError(error)
       }
     }
+
+    const sincronizeItem = () =>{
+      setLoading(true);
+      setSincronizedItem(false);
+    }
   
     return {
-      item, saveItem, loading, error
+      item, saveItem, loading, error, sincronizeItem, sincronizedItem
     }
 }
 

@@ -1,12 +1,13 @@
 import React from "react";
 import { useLogicalStorage } from "./useLocalStorage";
 
-const TodoContext = React.createContext();
 
-const TodoProvider = (props) => {
+const useTodo = () => {
     const {
         item:todos, 
         saveItem: saveTodo,
+        sincronizeItem:sincronizeTodo,
+        sincronizedItem:sincronizedTodo,
         loading,
         error
       } = useLogicalStorage('TODOS_V1', [])
@@ -28,6 +29,7 @@ const TodoProvider = (props) => {
           return todoText.includes(searchText);
         })
       }
+
     
       const completeTodos = (text)=> {
         // Item = {...Item,completed: true}
@@ -60,8 +62,7 @@ const TodoProvider = (props) => {
         saveTodo(newTodo);
       };
 
-    return(
-        <TodoContext.Provider value={{
+    return{
             error,
             loading,
             completedTodos,
@@ -73,11 +74,11 @@ const TodoProvider = (props) => {
             deleteTodos,
             openModal,
             setOpenModal,
-            addTodo
-        }}>
-            {props.children}
-        </TodoContext.Provider>
-    )
+            addTodo,
+            sincronizeTodo,
+            sincronizedTodo
+        }
+          
 }
 
-export {TodoContext, TodoProvider};
+export {useTodo};

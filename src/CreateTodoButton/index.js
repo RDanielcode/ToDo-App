@@ -1,9 +1,9 @@
 import React from "react";
-import { TodoContext } from "../TodoContext";
+// import { TodoContext } from "../TodoContext";
 import {FcGoodDecision} from "react-icons/fc";
 
-function CreateTodoButton (){
-    const {setOpenModal, /*openModal*/} = React.useContext(TodoContext);
+function CreateTodoButton ({setOpenModal}){
+    // const {setOpenModal, /*openModal*/} = React.useContext(TodoContext);
     const buttonFunction = () => {
         // if (openModal){
         //     setOpenModal(false)
